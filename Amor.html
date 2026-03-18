@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mateus & Vitória — Nossa História</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#07060a;
+  --muted:#cfcfd6;
+  --accent1:#8A6CFF;
+  --accent2:#FF6EC7;
+  --accent3:#33FFF3;
+  --header-height:76px;
+}
+
+/* reset */
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; background:#0b0b0f; color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+body{ padding-top: var(--header-height); }
+
+/* canvas full screen background effect */
+#scene { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* header */
+.header-inner{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  height:var(--header-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 22px;
+  z-index:1200;
+  background:linear-gradient(180deg, rgba(0,0,0,0.36), rgba(0,0,0,0.02));
+  border-bottom:1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+}
+
+.logo { font-family:"Playfair Display", serif; font-weight:700; font-size:18px; color:#fff; }
+
+/* nav / tabs */
+.top-nav{
+  position:relative;
+  overflow:visible;
+  padding:8px 18px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  flex:1;
+  margin-left:16px;
+  margin-right:8px;
+}
+.tabs-inner{
+  display:flex;
+  gap:45px;
+  align-items:center;
+  justify-content:flex-start;
+  width:100%;
+  padding-inline: 6px;
+  position:relative;
+}
+.tab{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  padding:12px 22px;
+  font-weight:700;
+  font-size:16px;
+  color:rgba(255,255,255,0.78);
+  background:none;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  transition: color .16s ease, transform .12s ease;
+}
+.tab:active{ transform: translateY(1px); }
+.tab:hover{ color:#fff; }
+
+.tab-indicator{
+  position:absolute;
+  bottom:8px;
+  left:0;
+  height:3px;
+  width:40px;
+  border-radius:3px;
+  background: linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  box-shadow: 0 6px 18px rgba(138,108,255,0.12);
+  transition: left .28s cubic-bezier(.2,.9,.2,1), width .28s cubic-bezier(.2,.9,.2,1);
+  will-change: left, width;
+  z-index:79;
+  transform-origin:center;
+}
+.tab.active{ color:#fff; }
+
+/* layout */
+.wrapper{
+  min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding:18px 10px 60px;
+  z-index:10;
+}
+.phone{
+  width:100%;
+  max-width:980px;
+  background:transparent;
+  border-radius:14px;
+  overflow:visible;
+  position:relative;
+  z-index:10;
+}
+main{ position:relative; z-index:10; padding-bottom:40px; }
+
+section{
+
+min-height:calc(100vh - var(--header-height));
+
+padding-top:var(--header-height);
+
+padding-bottom:40px;
+
+box-sizing:border-box;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+
+
+}
+/* hero */
+.hero{ 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  text-align:center; 
+  padding-top:10px; 
+}
+
+.hero{
+  justify-content:center;
+}
+
+@media (max-width:760px){
+  .hero h1 { font-size:28px; }
+  .music-cover{ width:68px; height:68px; flex:0 0 68px; }
+  .tab{ padding:10px 12px; font-size:15px; }
+  body{ padding-top: calc(var(--header-height) + 10px); }
+}
+
+.hero .inner{ max-width:820px; }
+.hero h1{ font-family:"Playfair Display", serif; font-weight:700; font-size:44px; margin:10px 0; color:#f3f0ff; letter-spacing:-0.6px; display:flex; gap:12px; align-items:center; justify-content:center; }
+.hero .subtitle{ margin-top:8px; color:#ffffff; font-size:16px; max-width:760px; opacity:0.95; line-height:1.5; }
+
+#start-btn{ display:inline-block; margin-top:18px; padding:12px 26px; border-radius:999px; font-weight:800; color:#07060a; background: linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3)); box-shadow: 0 12px 28px rgba(138,108,255,0.12); border: none; cursor:pointer; transition: transform .18s ease, box-shadow .18s; font-size:15px; }
+#start-btn.pulse { animation: pulse-btn 2200ms infinite; }
+@keyframes pulse-btn { 0% { transform: translateY(0); } 50% { transform: translateY(-2px); } 100% { transform: translateY(0); } }
+.heart{
+
+width:18px;
+height:18px;
+
+background:#ff4d6d;
+
+display:inline-block;
+
+transform:rotate(45deg);
+
+position:relative;
+
+box-shadow:0 0 10px rgba(255,70,100,0.6);
+
+}
+
+.heart::before,
+.heart::after{
+
+content:"";
+
+width:18px;
+height:18px;
+
+background:#ff4d6d;
+
+border-radius:50%;
+
+position:absolute;
+
+}
+
+.heart::before{
+top:-9px;
+left:0;
+}
+
+.heart::after{
+left:-9px;
+top:0;
+}
+
+.active-beat{
+animation:beat 0.3s ease;
+}
+
+@keyframes beat{
+0%{transform:scale(1) rotate(45deg);}
+50%{transform:scale(1.4) rotate(45deg);}
+100%{transform:scale(1) rotate(45deg);}
+}
+/* music, timeline, gallery, cards */
+.container{ max-width:860px; margin:0 auto; }
+.music-wrap{ max-width:760px; margin:0 auto; }
+.music-card{ display:flex; gap:12px; align-items:center; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.04); padding:12px; border-radius:12px; box-shadow: 0 8px 28px rgba(0,0,0,0.6); justify-content:flex-start; }
+.music-cover{ width:86px; height:86px; border-radius:10px; overflow:hidden; flex:0 0 86px; background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:flex; align-items:center; justify-content:center; box-shadow: 0 6px 20px rgba(0,0,0,0.6); }
+.music-cover img{ width:100%; height:100%; object-fit:cover; display:block; }
+.track-title{ font-weight:700; font-size:16px; color:#fff; margin-bottom:4px; }
+.track-artist{ color:var(--muted); font-size:13px; }
+
+.music-note{ margin-top:12px; color:var(--muted); font-size:15px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.6; text-align:center; }
+.music-note .word{ display:inline-block; opacity:0; transform: translateY(6px) scale(.995); transition: opacity .12s ease, transform .18s cubic-bezier(.2,.9,.2,1); margin-right:6px; color:var(--muted); font-weight:400; }
+.music-note .word.show{ opacity:1; transform: translateY(0) scale(1); color:#fff; }
+.music-note .word.pulse{ animation: word-pulse 160ms ease; }
+@keyframes word-pulse{ 0%{ transform: translateY(0) scale(1); } 50%{ transform: translateY(-2px) scale(1.05); } 100%{ transform: translateY(0) scale(1); } }
+
+.timeline-outer{ position:relative; max-width:760px; margin:8px auto 28px; padding:18px 12px; transition: padding-bottom .25s; min-height:240px; overflow:visible; z-index:12; }
+.timeline-line{ position:absolute; left:50%; top:8px; bottom:8px; width:6px; transform:translateX(-50%); background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.06)); border-radius:6px; z-index:6; }
+.timeline-visual{ position:absolute; left:50%; transform:translateX(-50%); width:8px; height:0; margin-top:8px; border-radius:4px; background: linear-gradient(180deg,var(--accent1),var(--accent2)); z-index:10; transition:height .45s ease; }
+#timelineMarkers { position:absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; z-index:11; }
+.marker{ position:absolute; left:50%; transform:translateX(-50%); width:14px; height:14px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff, var(--accent2)); box-shadow: 0 8px 22px rgba(255,110,199,0.12); opacity:0; transition: opacity .32s, transform .32s; }
+.marker.show{ opacity:1; transform:translateX(-50%) scale(1.06); }
+
+.timeline-cards{ position:relative; min-height: 300px; }
+.card{ position:absolute; width:44%; max-width:320px; padding:12px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03); box-shadow: 0 8px 24px rgba(0,0,0,0.45); color:var(--muted); opacity:0; transform: translateY(8px) scale(.995); transition: opacity .32s ease, transform .32s; z-index:14; font-size:14px; text-align:left; }
+.card.show{ opacity:1; transform: translateY(0) scale(1); }
+.card.left{ left:6%; }
+.card.right{ left:52%; }
+
+.gallery img{ width:48%; margin:1%; border-radius:10px; display:inline-block; }
+
+footer{ text-align:center; padding:18px 8px; font-size:13px; color:var(--muted); }
+
+/* accessibility */
+.tab:focus{ outline:2px dashed rgba(255,255,255,0.08); outline-offset:4px; }
+
+@media (max-width:760px){
+  .hero h1 { font-size:28px; }
+  .music-cover{ width:68px; height:68px; flex:0 0 68px; }
+  .tab{ padding:10px 12px; font-size:15px; }
+  body{ padding-top: calc(var(--header-height) + 10px); }
+}
+@media (max-width:600px){
+
+section{
+  padding:40px 12px 20px 12px;
+  justify-content:center;
+}
+
+}
+.next-btn{
+
+display:block;
+margin:40px auto 0 auto;
+
+padding:12px 26px;
+
+border-radius:999px;
+
+background:#ffffff;
+color:#000;
+
+border:none;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:all .5s ease;
+
+opacity:0;
+transform:translateY(30px);
+
+pointer-events:none;
+
+}
+
+.next-btn.show{
+
+opacity:1;
+transform:translateY(0);
+
+pointer-events:auto;
+
+}
+</style>
+</head>
+<body>
+
+<canvas id="scene"></canvas>
+
+<header class="header-inner" role="banner" aria-label="Cabeçalho principal">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div class="logo" id="logoText">Mateus & Vitória</div>
+  </div>
+
+  <nav id="topNav" class="top-nav" role="navigation" aria-label="Navegação principal">
+    <div class="tabs-inner" id="tabsInner">
+      <button class="tab" data-target="inicio" role="tab" aria-selected="false">Início</button>
+      <button class="tab" data-target="musica" role="tab" aria-selected="false">Nossa Música</button>
+      <button class="tab" data-target="timeline" role="tab" aria-selected="false">Linha do Tempo</button>
+      <button class="tab" data-target="galeria" role="tab" aria-selected="false">Galeria</button>
+      <button class="tab" data-target="carta" role="tab" aria-selected="false">Carta</button>
+
+      <div id="tabIndicator" class="tab-indicator" aria-hidden="true"></div>
+    </div>
+  </nav>
+</header>
+
+<div class="wrapper">
+  <div class="phone">
+    <main>
+      <section id="inicio" class="hero">
+        <div class="inner">
+          <h1>Mateus <span class="heart" id="heart" aria-hidden="true"></span> Vitória</h1>
+          <div class="subtitle">uma história de amor escrita nas estrelas, um universo que começamos a construir juntos.</div>
+          <button id="start-btn" class="pulse" aria-label="Começar nossa história">Começar nossa história</button>
+        </div>
+      </section>
+
+      <section id="musica" class="section reveal">
+        <div class="container">
+          <h2>Nossa Música</h2>
+          <div class="music-wrap">
+            <div class="music-card" role="region" aria-label="Player da nossa música">
+              <div class="music-cover" aria-hidden="false">
+                <img src="https://m.media-amazon.com/images/I/81sNIUS8dFL._UF1000,1000_QL80_.jpg" alt="Capa - Jorge & Mateus">
+              </div>
+              <div class="music-meta">
+                <div class="track-title" id="track-title">Os Anjos Cantam</div>
+                <div class="track-artist" id="track-artist">Jorge &amp; Mateus</div>
+              </div>
+            </div>
+
+            <div class="music-note" id="music-note" aria-live="polite">
+              “Essa música marcou a nossa história, carrega a nossa vibe única. Nas pequenas discussões e nos dias de aprendizado descobrimos que só nos encaixamos de verdade quando Cristo é a terceira dobra do nosso amor. Cada batida nos lembra de nós, da nossa trajetória e da beleza de crescermos lado a lado.”
+            </div>
+<button id="toTimelineBtn" class="next-btn" style="display:none">
+Continuar nossa história ✨
+</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="section reveal">
+        <div class="container">
+          <h2>Linha do Tempo</h2>
+
+          <div class="timeline-outer" id="timeline-outer">
+            <div class="timeline-line" aria-hidden="true"></div>
+
+            <div id="btnFollowWrap">
+              <button id="timelineBtn" aria-controls="timelineLine">Revelar nossa história</button>
+            </div>
+
+            <div id="timelineLine" class="timeline-visual" aria-hidden="true"></div>
+            <div id="timelineMarkers"></div>
+
+            <div class="timeline-cards" id="timelineCards">
+              <div class="card" data-index="0" aria-hidden="true">
+                <span class="date">07 DE DEZEMBRO, 2024</span>
+                <h3>O INICIO DE TUDO</h3>
+                <p>Tudo começou em um RPG… entre histórias e risadas, sua criatividade e seu humor me conquistaram,e foi naquele instante que eu escolhi mudar o rumo da minha história e te encontrar de verdade, te mandando uma mensagem no Instagram.</p>
+              </div>
+
+              <div class="card" data-index="1" aria-hidden="true">
+                <span class="date">29 DE DEZEMBRO, 2024</span>
+                <h3>O PRIMEIRO OI</h3>
+                <p>Nossa primeiro encontro foi leve, engraçado e especial… não começou com aquela pergunta, mas foi o simples “gosta de pão com vinagrete?” que ficou marcado e, sem a gente perceber, mudou completamente nossos mundos.</p>
+              </div>
+
+              <div class="card" data-index="2" aria-hidden="true">
+                <span class="date">07 DE DEZEMBRO, 2025</span>
+                <h3>PEDIDO DE NAMORO!</h3>
+                <p>O instante em que o sentimento deixou de ser dúvida e passou a ser certeza, transformando tudo o que antes parecia incerto em algo claro, forte e impossível de ignorar.</p>
+              </div>
+
+              <div class="card" data-index="3" aria-hidden="true">
+                <span class="date">HOJE</span>
+                <h3>CONSTRUINDO O FUTURO</h3>
+                <p>Olhando para trás, cada momento se torna uma estrela na nossa jornada… e, à frente, existe um universo inteiro de possibilidades esperando por nós.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria" class="section reveal">
+        <div class="container">
+          <h2>Galeria de Momentos</h2>
+          <div class="gallery">
+            <img src="https://picsum.photos/seed/a/800/600" alt="Momento 1">
+            <img src="https://picsum.photos/seed/b/800/600" alt="Momento 2">
+            <img src="https://picsum.photos/seed/c/800/600" alt="Momento 3">
+            <img src="https://picsum.photos/seed/d/800/600" alt="Momento 4">
+          </div>
+        </div>
+      </section>
+
+      <section id="carta" class="section reveal">
+        <div class="container">
+          <h2>Carta</h2>
+          <div class="letter">
+            Desde o momento em que nossos caminhos se cruzaram, eu soube que algo especial estava começando.<br><br>
+            Cada sorriso, cada conversa, cada viagem — tudo isso construiu a história que quero continuar escrevendo ao seu lado.<br><br>
+            Obrigado por tornar o meu universo mais bonito.
+          </div>
+        </div>
+      </section>
+
+      <footer>Feito por Mateus</footer>
+    </main>
+  </div>
+</div>
+
+<div id="yt-player" style="display:none;"></div>
+<div id="gesture" aria-hidden="true"></div>
+<div id="hint" style="display:none">Toque em qualquer lugar para ativar o áudio</div>
+
+<script>
+/* canvas / estrelas / meteoros */
+const canvas = document.getElementById('scene');
+const ctx = canvas.getContext('2d');
+
+let W = 0, H = 0;
+function resizeCanvas(){
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', ()=>{ resizeCanvas(); createStars(); });
+
+const LAYERS = [
+  {count: 120, rMin: 0.3, rMax: 0.9, speed: 0.02, alphaMin: 0.04, alphaMax: 0.18, colorBias: 'cool'},
+  {count: 70,  rMin: 0.9, rMax: 1.8, speed: 0.06, alphaMin: 0.08, alphaMax: 0.3, colorBias: 'neutral'},
+  {count: 30,  rMin: 1.8, rMax: 3.4, speed: 0.14, alphaMin: 0.18, alphaMax: 0.9, colorBias: 'warm'}
+];
+
+let stars = [];
+function rand(a,b){ return a + Math.random()*(b-a); }
+function pickStarColor(bias){
+  if(bias==='cool') return `rgba(${200+Math.round(Math.random()*55)}, ${200+Math.round(Math.random()*55)}, 255,`;
+  if(bias==='warm') return `rgba(255, ${220+Math.round(Math.random()*35)}, ${150+Math.round(Math.random()*80)},`;
+  return `rgba(255,255,255,`;
+}
+function createStars(){
+  stars = [];
+  LAYERS.forEach(layer=>{
+    for(let i=0;i<layer.count;i++){
+      stars.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: rand(layer.rMin, layer.rMax),
+        speed: layer.speed * (0.6 + Math.random()*0.9),
+        alphaBase: rand(layer.alphaMin, layer.alphaMax),
+        twinkleSpeed: rand(0.001, 0.01),
+        colorPrefix: pickStarColor(layer.colorBias),
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  });
+}
+createStars();
+
+let meteors = [];
+function spawnMeteor(){
+  const isBlue = Math.random() < 0.6;
+  const color = isBlue ? {r:138,g:108,b:255} : {r:255,g:110,b:199};
+  const angle = -Math.PI * (0.18 + Math.random()*0.12);
+  const speed = 6 + Math.random()*5;
+  const startX = -60 - Math.random()*220;
+  const startY = Math.random()*H*0.25 + 10;
+  const len = 140 + Math.random()*260;
+  meteors.push({
+    x: startX, y: startY,
+    vx: Math.cos(angle)*speed,
+    vy: Math.sin(angle)*speed,
+    life: 0,
+    maxLife: Math.round(len / speed) + 40,
+    color,
+    history: [],
+    maxHistory: Math.round(12 + Math.random()*28)
+  });
+}
+
+function spawnShootingStar(){
+  const color = {r:255, g:245, b:200};
+  const angle = Math.PI * (0.78 + Math.random()*0.18);
+  const speed = 10 + Math.random()*10;
+  const startX = W + 40 + Math.random()*200;
+  const startY = Math.random()*H*0.28 + 10;
+  const len = 200 + Math.random()*380;
+  meteors.push({
+    x: startX, y: startY,
+    vx: Math.cos(angle)*speed,
+    vy: Math.sin(angle)*speed,
+    life: 0,
+    maxLife: 300,
+    color,
+    history: [],
+    maxHistory: 80,
+    bright: true
+  });
+}
+
+function drawStars(now){
+  for(const s of stars){
+    s.x += s.speed * 0.3;
+    s.y += s.speed * 0.06;
+    if(s.x > W + 20) s.x = -20;
+    const a = Math.max(0.02, s.alphaBase + Math.sin(now * s.twinkleSpeed * 2 + s.phase) * (s.alphaBase*0.7));
+    if(s.r > 1.8){
+      const rg = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*6);
+      rg.addColorStop(0, `${s.colorPrefix}${(a*0.9).toFixed(3)})`);
+      rg.addColorStop(1, `rgba(255,255,255,0)`);
+      ctx.fillStyle = rg;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r*2.2, 0, Math.PI*2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = `${s.colorPrefix}${a.toFixed(3)})`;
+      ctx.fillRect(Math.round(s.x), Math.round(s.y), Math.max(1, s.r), Math.max(1, s.r));
+    }
+  }
+}
+
+function drawMeteor(m){
+
+m.history.unshift({x:m.x,y:m.y});
+
+if(m.history.length>40){
+m.history.pop();
+}
+
+ctx.lineCap="round";
+
+for(let i=0;i<m.history.length-1;i++){
+
+let p0=m.history[i];
+let p1=m.history[i+1];
+
+let t=i/(m.history.length-1);
+
+ctx.strokeStyle="rgba(255,255,255,"+(1-t)+")";
+
+ctx.lineWidth=14*(1-t);
+
+ctx.beginPath();
+ctx.moveTo(p0.x,p0.y);
+ctx.lineTo(p1.x,p1.y);
+ctx.stroke();
+
+}
+
+
+/* brilho forte */
+
+let g=ctx.createRadialGradient(
+m.x,m.y,0,
+m.x,m.y,60
+);
+
+g.addColorStop(0,"#ffffff");
+g.addColorStop(0.2,"#ffffff");
+g.addColorStop(0.5,"rgba(255,255,255,0.6)");
+g.addColorStop(1,"rgba(255,255,255,0)");
+
+ctx.fillStyle=g;
+
+ctx.beginPath();
+ctx.arc(m.x,m.y,60,0,Math.PI*2);
+ctx.fill();
+
+}
+
+let lastMeteorAt = 0;
+function loop(now){
+  ctx.clearRect(0,0,W,H);
+
+  const bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0, '#02020b');
+  bg.addColorStop(1, '#000007');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,W,H);
+
+  drawStars(now);
+
+  if((Math.random() < 0.006 && (now - lastMeteorAt) > 220) || (meteors.length < 1 && Math.random() < 0.35)){
+    if(Math.random() < 0.18) spawnShootingStar();
+    else spawnMeteor();
+    lastMeteorAt = now;
+  }
+
+  for(let i=meteors.length-1;i>=0;i--){
+    const m = meteors[i];
+    drawMeteor(m);
+    m.x += m.vx;
+    m.y += m.vy;
+    m.life++;
+    if(m.life > m.maxLife || m.x < -300 || m.x > W + 300 || m.y > H + 300 || m.y < -300) meteors.splice(i,1);
+  }
+
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* YouTube player kept */
+let ytPlayer = null;
+const YT_VIDEO_ID = 'ICS6uKC93w0';
+function onYouTubeIframeAPIReady(){
+
+ytPlayer = new YT.Player('yt-player', {
+
+height:'0',
+width:'0',
+
+videoId: YT_VIDEO_ID,
+
+playerVars: {
+
+controls:0,
+rel:0,
+modestbranding:1,
+playsinline:1,
+autoplay:0,
+mute:1
+
+},
+
+events: {
+
+onReady: (e)=>{
+
+ytPlayer = e.target;
+
+ytPlayer.mute();
+
+},
+
+onStateChange: onYTStateChange
+
+}
+
+});
+
+}
+function onYTStateChange(e){
+  if(e.data === YT.PlayerState.PLAYING){ startBeatEngine(); maybeStartWordReveal(); }
+  else if(e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED){ stopBeatEngine(); }
+}
+(function loadYouTubeAPI(){ const tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api"; const firstScript = document.getElementsByTagName('script')[0]; firstScript.parentNode.insertBefore(tag, firstScript); })();
+
+/* palavras da música */
+const musicNoteEl = document.getElementById('music-note');
+let wordEls = [], wordIndex = 0, wordRevealStarted = false;
+function prepareWords(){
+  const raw = (musicNoteEl.textContent || '').trim().replace(/\s+/g,' ');
+  if(!raw) return;
+  const words = raw.split(' ');
+  musicNoteEl.innerHTML = words.map(w=>`<span class="word">${w}</span>`).join(' ');
+  wordEls = Array.from(musicNoteEl.querySelectorAll('.word'));
+  wordIndex = 0;
+}
+prepareWords();
+function revealNextWord(){
+
+if(!wordEls || wordIndex>=wordEls.length) return;
+
+const w = wordEls[wordIndex];
+
+w.classList.add('show','pulse');
+
+setTimeout(()=>w.classList.remove('pulse'),40);
+
+wordIndex++;
+
+if(wordIndex >= wordEls.length){
+
+const btn = document.getElementById("toTimelineBtn");
+
+if(btn){
+
+setTimeout(()=>{
+
+btn.style.display = "block";
+
+setTimeout(()=>{
+btn.classList.add("show");
+},50);
+
+},800); // ← tempo pra aparecer depois que termina o texto
+
+}
+
+}
+
+}
+function maybeStartWordReveal(){
+
+if(wordRevealStarted) return;
+
+wordRevealStarted = true;
+
+const tick = ()=>{
+
+revealNextWord();
+
+if(wordIndex < wordEls.length){
+setTimeout(tick,150);
+}
+
+};
+
+setTimeout(tick,40);
+
+}
+
+/* batida */
+let beatIntervalId = null; let beatBPM = 94; let beatMs = Math.round(60000/beatBPM);
+function startBeatEngine(){ stopBeatEngine(); beatMs = Math.round(60000/beatBPM); triggerBeat(); beatIntervalId = setInterval(triggerBeat, beatMs); }
+function stopBeatEngine(){ if(beatIntervalId){ clearInterval(beatIntervalId); beatIntervalId=null; } document.getElementById('heart')?.classList.remove('active-beat'); }
+function triggerBeat(){
+
+const heartEl = document.getElementById('heart');
+if(!heartEl) return;
+
+heartEl.classList.remove("active-beat");
+
+void heartEl.offsetWidth;
+
+heartEl.classList.add("active-beat");
+
+}
+document.getElementById('start-btn').addEventListener('click', ()=>{
+
+const music = document.getElementById('musica');
+
+if(music){
+music.scrollIntoView({
+behavior:'smooth',
+block:'start'
+});
+}
+
+function tryPlay(){
+
+if(ytPlayer && ytPlayer.playVideo){
+
+ytPlayer.unMute();
+
+ytPlayer.playVideo();
+
+startBeatEngine();
+
+maybeStartWordReveal();
+
+}else{
+
+setTimeout(tryPlay,200);
+
+}
+
+}
+
+tryPlay();
+
+});
+
+/* TIMELINE */
+(function timeline(){
+  const btn = document.getElementById('timelineBtn');
+  const line = document.getElementById('timelineLine');
+  const markers = document.getElementById('timelineMarkers');
+  const cardsWrap = document.getElementById('timelineCards');
+  const cards = Array.from(cardsWrap.querySelectorAll('.card'));
+  let opened = 0; const CARD_GROW = 110; const BASE_LINE = 12;
+  line.style.height='0px';
+  markers.innerHTML='';
+  function createMarker(i){ const m=document.createElement('div'); m.className='marker'; markers.appendChild(m); requestAnimationFrame(()=>{ const desired = BASE_LINE + CARD_GROW*i + 6; m.style.top = `${Math.max(6, desired)}px`; m.classList.add('show'); }); }
+  function placeCard(card,i){ card.classList.remove('left','right'); card.classList.add(i%2===0?'left':'right'); requestAnimationFrame(()=>{ const desired = BASE_LINE + CARD_GROW*i; const top = Math.max(8, Math.round(desired - (card.offsetHeight/2))); card.style.top = `${top}px`; if(i%2===0) card.style.left='6%'; else card.style.left='52%'; }); }
+  btn.addEventListener('click', ()=>{ if(opened>=cards.length){ btn.textContent='Todas as memórias reveladas'; btn.disabled=true; return; } const newH = BASE_LINE + CARD_GROW*(opened+1) + 8; line.style.height = `${newH}px`; const card = cards[opened]; if(card){ placeCard(card, opened); createMarker(opened); setTimeout(()=>{ card.classList.add('show'); card.setAttribute('aria-hidden','false'); card.scrollIntoView({behavior:'smooth', block:'center'}); },160); } opened++; if(opened>=cards.length){ btn.textContent='Todas as memórias reveladas'; btn.disabled=true; } else { btn.textContent = `Revelar próxima (${opened+1}/${cards.length})`; } });
+  setTimeout(()=> cards.forEach((c,i)=> c.classList.add(i%2===0?'left':'right')),80);
+})();
+
+/* TABS */
+(function tabsBehavior(){
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const tabsInner = document.getElementById('tabsInner');
+  const indicator = document.getElementById('tabIndicator');
+  const logo = document.getElementById('logoText');
+  const sections = tabs.map(t=>document.getElementById(t.dataset.target)).filter(Boolean);
+
+  function moveIndicatorTo(el, immediate=false){
+    if(!el || !indicator || !tabsInner) return;
+    const left = el.offsetLeft;
+    const width = Math.max(28, el.offsetWidth);
+    if(immediate){
+      indicator.style.transition = 'none';
+      indicator.style.left = `${left}px`;
+      indicator.style.width = `${width}px`;
+      void indicator.offsetWidth;
+      indicator.style.transition = '';
+    } else {
+      indicator.style.left = `${left}px`;
+      indicator.style.width = `${width}px`;
+    }
+  }
+
+  function setActiveTab(tabEl){
+    tabs.forEach(t=> {
+      const isActive = t === tabEl;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      t.setAttribute('aria-current', isActive ? 'true' : 'false');
+      t.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+    moveIndicatorTo(tabEl);
+    try{
+      const txt = tabEl.textContent.trim();
+      if(txt && txt.toLowerCase()!=='início') logo.textContent = txt;
+      else logo.textContent = 'Mateus & Vitória';
+    }catch(e){}
+  }
+
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      const targetId = tab.dataset.target;
+      const target = document.getElementById(targetId);
+      if(target){
+        const headerHeight = document.querySelector('.header-inner').getBoundingClientRect().height || 76;
+
+const offset = headerHeight + 20;
+
+const top =
+  target.getBoundingClientRect().top +
+  window.scrollY -
+  offset;
+        window.scrollTo({ top, behavior:'smooth' });
+      }
+      setActiveTab(tab);
+      setTimeout(()=> target?.focus?.(), 600);
+    });
+
+    tab.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); const idx = tabs.indexOf(tab); tabs[(idx+1)%tabs.length].focus(); }
+      if(e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); const idx = tabs.indexOf(tab); tabs[(idx-1+tabs.length)%tabs.length].focus(); }
+      if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tab.click(); }
+    });
+  });
+
+  let lastActiveTab = null;
+  function updateActiveTabByScroll(){
+    if(!sections.length) return;
+    const headerHeight = document.querySelector('.header-inner').getBoundingClientRect().height || 76;
+    const viewportCenter = window.scrollY + headerHeight + (window.innerHeight - headerHeight) * 0.18;
+    let minDist = Infinity;
+    let chosen = sections[0];
+    sections.forEach(s=>{
+      const rect = s.getBoundingClientRect();
+      const secCenter = window.scrollY + rect.top + (rect.height/2);
+      const d = Math.abs(secCenter - viewportCenter);
+      if(d < minDist){ minDist = d; chosen = s; }
+    });
+    const tab = tabs.find(t=>t.dataset.target === chosen.id) || tabs[0];
+    if(tab && tab !== lastActiveTab){
+      lastActiveTab = tab;
+      setActiveTab(tab);
+    }
+  }
+
+  let rafScheduled = false;
+  function onScroll() {
+    if(rafScheduled) return;
+    rafScheduled = true;
+    requestAnimationFrame(()=>{
+      updateActiveTabByScroll();
+      rafScheduled = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  window.addEventListener('load', ()=> {
+    setTimeout(()=> {
+      updateActiveTabByScroll();
+      const initial = tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0];
+      moveIndicatorTo(initial, true);
+    }, 80);
+  });
+
+  let resizeTimer = null;
+  window.addEventListener('resize', ()=> {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=> {
+      const active = tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0];
+      if(active){ moveIndicatorTo(active, true); }
+      updateActiveTabByScroll();
+    }, 80);
+  });
+})();
+document.getElementById("toTimelineBtn").addEventListener("click", ()=>{
+
+const target = document.getElementById("timeline");
+
+const headerHeight =
+document.querySelector(".header-inner").offsetHeight || 76;
+
+const top =
+target.getBoundingClientRect().top +
+window.scrollY -
+headerHeight -
+20;
+
+window.scrollTo({
+top,
+behavior:"smooth"
+});
+
+});
+</script>
+</body>
+</html>
